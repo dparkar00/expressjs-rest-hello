@@ -1,27 +1,28 @@
 import {
-  Entity, Column, PrimaryGeneratedColumn, ManyToMany, 
-  BaseEntity, JoinTable
+  Entity, Column, PrimaryGeneratedColumn, OneToMany, BaseEntity
 } from 'typeorm';
 
+import {Planet} from './Planets';
+import {People} from './People';
+import { Favorites } from './Favorites';
+
 @Entity()
-export class Users extends BaseEntity{
+export class Users extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number;  // Updated to `id` for consistency
 
   @Column()
-  first_name: string;
+  firstName: string;  // Use camelCase to follow TypeScript conventions
 
   @Column()
-  last_name: string;
+  lastName: string;
 
-  @Column({unique: true})
+  @Column({ unique: true })
   email: string;
 
   @Column()
   password: string;
 
-  // @ManyToMany(() => Planet)
-  // @JoinTable()
-  // planets: Planet[];
-  
+  @OneToMany(() => Favorites, favorite => favorite.users)
+  favorites: Favorites[];
 }

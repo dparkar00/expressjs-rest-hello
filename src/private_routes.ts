@@ -19,5 +19,7 @@ import * as actions from './actions';
 const router = Router();
 
 router.get('/user', safe(actions.getUsers));
+router.delete('/favorite/planet/:planet_id', safe(actions.deleteFavoritePlanet));
+router.delete('/favorite/people/:people_id', safe(actions.deleteFavoritePeople));
 
 export default router;
